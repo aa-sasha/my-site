@@ -18,12 +18,11 @@ const Card = ({ project, index, progress, total }: { project: any, index: number
 
   return (
     <motion.article 
-      className={`sticky flex flex-col gap-6 pt-10 pb-12 px-8 w-full origin-top rounded-[2rem] border border-white/60 shadow-[0_10px_30px_rgba(0,0,0,0.3),_inset_0_1px_0_rgba(255,255,255,0.8)] text-black ${bgColor}`}
+      className={`${isLast ? '' : 'sticky'} flex flex-col gap-6 pt-10 pb-12 px-8 w-full origin-top rounded-[2rem] border border-white/60 shadow-[0_10px_30px_rgba(0,0,0,0.3),_inset_0_1px_0_rgba(255,255,255,0.8)] text-black ${bgColor}`}
       style={{ 
-        top: `calc(2rem + ${index * 8}px)`, 
+        top: isLast ? undefined : `calc(2rem + ${index * 8}px)`, 
         zIndex: index + 10,
-        scale,
-        rotateX
+        scale: isLast ? 1 : scale,
       }}
     >
       <div className="flex flex-col gap-2">
