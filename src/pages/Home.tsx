@@ -16,7 +16,7 @@ export function Home() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 max-w-[700px] flex flex-col gap-24">
+        <main className="flex-1 max-w-[900px] flex flex-col gap-24">
           <Hero />
           <Projects />
           <Experience />
