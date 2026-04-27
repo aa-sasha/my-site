@@ -1,24 +1,14 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import { Navbar } from "./components/Navbar";
-import { Hero } from "./components/Hero";
-import { Projects } from "./components/Projects";
-import { Experience } from "./components/Experience";
-import { Footer } from "./components/Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { CaseStudy } from "./pages/CaseStudy";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-bg text-ink selection:bg-accent selection:text-black">
-      <Navbar />
-      <main>
-        <Hero />
-        <Projects />
-        <Experience />
-      </main>
-      <Footer />
-    </div>
+    <Router basename="/beta">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/case/:slug" element={<CaseStudy />} />
+      </Routes>
+    </Router>
   );
 }

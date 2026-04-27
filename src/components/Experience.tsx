@@ -1,98 +1,80 @@
-import { motion } from "motion/react";
-
-const EXPERIENCES = [
-  {
-    role: "Senior Product Designer",
-    company: "my.games",
-    period: "2022 — Present",
-    description: "Designed social features and monetization mechanics for War Robots — a AAA mech shooter with 300M+ players and $1B+ in lifetime revenue. Evolved the design system and collaborated closely with game designers and engineers."
-  },
-  {
-    role: "Product Designer",
-    company: "noomeera",
-    period: "2020 — 2022",
-    description: "Executed end-to-end design of a social network and messenger for iOS/Android: from market research and prototyping to testing and Figma migration. Redesign of the social app grew the App Store rating from 3.6 to 4.5."
-  },
-  {
-    role: "UX Designer",
-    company: "sibdev",
-    period: "2018 — 2020",
-    description: "Designed web and mobile interfaces across 15+ projects: e-commerce, SaaS, and corporate tools. Delivered client projects and redesigned the studio website. Organized a series of IT meetups."
-  }
-];
-
-const TEACHING = [
-  {
-    role: "Lecturer in UX Design",
-    company: "Institute of Business and Design (B&D)",
-    period: "2022 — Present",
-    description: "Develop curriculum, lecture on UX theory, supervise student projects. Education background: 5 years at a pedagogical university. This background shapes how I think about products — understanding how people learn, what builds habits, what creates motivation."
-  }
-];
+import { motion } from "framer-motion";
 
 export function Experience() {
-  return (
-    <section id="experience" className="border-b border-line p-6 md:p-12 lg:p-20">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-        {/* Experience List */}
-        <div className="lg:col-span-8">
-          <h3 className="text-muted text-xs font-bold tracking-[0.2em] uppercase mb-12">
-            work Experience
-          </h3>
-          <div className="space-y-12">
-            {EXPERIENCES.map((exp, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="group"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
-                  <h4 className="text-white font-medium text-lg">{exp.role}</h4>
-                  <span className="text-muted text-xs font-mono">{exp.period}</span>
-                </div>
-                <div className="text-accent text-sm font-medium tracking-wider uppercase mb-3">
-                  {exp.company}
-                </div>
-                <p className="text-muted text-sm leading-relaxed max-w-2xl">
-                  {exp.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+  const experiences = [
+    {
+      company: "Company Name",
+      role: "Senior Product Designer",
+      period: "2020 — Present",
+      description: "Led the design of core product features, improving user engagement by 40%. Collaborated closely with engineering and product teams to deliver high-quality solutions."
+    },
+    {
+      company: "Previous Agency",
+      role: "UX/UI Designer",
+      period: "2016 — 2020",
+      description: "Designed responsive web and mobile applications for international clients. Conducted user research and usability testing to iterate on designs."
+    },
+    {
+      company: "Start of Career",
+      role: "Graphic Designer",
+      period: "2014 — 2016",
+      description: "Created visual identities, marketing materials, and digital assets. Transitioned into digital product design."
+    }
+  ];
 
-        {/* Teaching List */}
-        <div className="lg:col-span-4">
-          <h3 className="text-muted text-xs font-bold tracking-[0.2em] uppercase mb-12">
-            Teaching
-          </h3>
-          <div className="space-y-12">
-            {TEACHING.map((teach, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
-              >
-                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
-                  <h4 className="text-white font-medium text-lg">{teach.role}</h4>
-                  <span className="text-muted text-xs font-mono">{teach.period}</span>
-                </div>
-                <div className="text-accent text-sm font-medium tracking-wider uppercase mb-3">
-                  {teach.company}
-                </div>
-                <p className="text-muted text-sm leading-relaxed">
-                  {teach.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+  return (
+    <section id="experience" className="pt-12 pb-24 scroll-mt-24 border-t border-line">
+      <motion.h3 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="text-sm text-white/60 mb-12 tracking-widest uppercase font-mono"
+      >
+        Work Experience
+      </motion.h3>
+      
+      <div className="flex flex-col gap-12">
+        {experiences.map((exp, index) => (
+          <motion.div 
+            key={index} 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col md:flex-row gap-4 md:gap-12"
+          >
+            <div className="md:w-1/3 shrink-0">
+              <div className="text-sm text-white/70 mb-1 font-mono">{exp.period}</div>
+              <h4 className="text-xl font-black text-white uppercase tracking-wide">{exp.company}</h4>
+              <div className="text-sm text-white/80 font-mono mt-1">{exp.role}</div>
+            </div>
+            <div className="md:w-2/3">
+              <p className="text-white/70 leading-relaxed text-sm font-mono">{exp.description}</p>
+            </div>
+          </motion.div>
+        ))}
       </div>
+
+      {/* Contacts section appended at the bottom */}
+      <motion.div 
+        id="contacts" 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-24 pt-12 border-t border-line scroll-mt-24"
+      >
+        <h3 className="text-sm text-white/60 mb-8 tracking-widest uppercase font-mono">Contacts</h3>
+        <div className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter mb-8 leading-tight">
+          Let's create something<br />amazing together.
+        </div>
+        <a 
+          href="mailto:sashanikitindesigner@gmail.com" 
+          className="inline-flex items-center justify-center bg-white text-black px-8 py-4 rounded-full font-black text-sm uppercase tracking-widest shadow-[0_0_20px_rgba(255,255,255,0.6)] hover:shadow-[0_0_30px_rgba(255,255,255,1)] hover:scale-105 active:scale-95 transition-all"
+        >
+          sashanikitindesigner@gmail.com
+        </a>
+      </motion.div>
     </section>
   );
 }
