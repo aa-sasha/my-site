@@ -3,22 +3,28 @@ import { motion } from "framer-motion";
 export function Experience() {
   const experiences = [
     {
-      company: "Company Name",
+      company: "MY.GAMES",
       role: "Senior Product Designer",
-      period: "2020 — Present",
-      description: "Led the design of core product features, improving user engagement by 40%. Collaborated closely with engineering and product teams to deliver high-quality solutions."
+      period: "2022 — Present",
+      description: "War Robots — designed UX across the game's meta layer: social systems, monetization, leaderboards, progression, live events, and design infrastructure for a AAA mobile mech shooter with 300M+ registered players."
     },
     {
-      company: "Previous Agency",
-      role: "UX/UI Designer",
-      period: "2016 — 2020",
-      description: "Designed responsive web and mobile applications for international clients. Conducted user research and usability testing to iterate on designs."
+      company: "Yandex ТЕХНО",
+      role: "Lead Product Designer",
+      period: "2024",
+      description: "Techno Quiz — designed a 23-day seasonal gamified competition with narrative storytelling, daily tasks, varied quiz mechanics, and competitive leaderboards within a Telegram mini-app."
     },
     {
-      company: "Start of Career",
-      role: "Graphic Designer",
-      period: "2014 — 2016",
-      description: "Created visual identities, marketing materials, and digital assets. Transitioned into digital product design."
+      company: "AnnNigm",
+      role: "Lead Product Designer",
+      period: "2023",
+      description: "Created a visual language for non-invasive biochemical trend monitoring — shapes, colors, and motion to communicate actionable health insights without numerical values."
+    },
+    {
+      company: "Noomeera / Meera",
+      role: "Product Designer",
+      period: "2020 — 2022",
+      description: "Designed the communication layer, granular privacy matrix, and feed for a geo-social network (Noomeera). Built a full-featured messenger from scratch — 50+ features, 500+ screens (Meera)."
     }
   ];
 

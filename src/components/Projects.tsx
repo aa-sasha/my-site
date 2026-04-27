@@ -32,18 +32,16 @@ const Card = ({ project, index, progress, total }: { project: any, index: number
         <div className="text-lg text-gray-600 font-mono">{project.category}</div>
       </div>
 
-      <div className="rounded-2xl overflow-hidden border-2 border-white/80 bg-[#111] mt-4 relative group glow-nokia aspect-[16/9] flex items-center justify-center">
+      <div className="rounded-2xl overflow-hidden border-2 border-white/80 bg-[#111] mt-4 relative group aspect-[16/9] flex items-center justify-center">
         {project.coverImage ? (
           <img 
-            src={project.coverImage} 
+            src={`${import.meta.env.BASE_URL}${project.coverImage.replace(/^\//, '')}`}
             alt={project.shortTitle} 
-            className="w-full h-auto object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100 mix-blend-luminosity hover:mix-blend-normal"
+            className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
           />
         ) : (
           <div className="text-white/20 uppercase tracking-widest font-bold text-xl">Image Placeholder</div>
         )}
-        {/* CRT Scanline Overlay */}
-        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.2)_50%)] bg-[length:100%_4px]"></div>
       </div>
 
       <div className="mt-4 flex flex-col gap-6">
