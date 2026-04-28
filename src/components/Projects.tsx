@@ -72,7 +72,7 @@ export function Projects() {
         Selected Projects
       </motion.h3>
       
-      <div className="flex flex-col gap-24 relative">
+      <div className="flex flex-col gap-24 relative pb-[80vh]">
         {projects.map((project, index) => (
           <Card 
             key={project.id} 
