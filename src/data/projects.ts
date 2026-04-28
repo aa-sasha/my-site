@@ -33,7 +33,7 @@ export const projects: ProjectData[] = [
     role: "Senior Product Designer",
     category: "Game Design & Systems",
     coverImage: "/2.webp",
-    description: "Designed UX across most parts of the game's meta layer: social systems, monetization features, leaderboards and seasonal competition, progression, live events, and the team's design infrastructure for a AAA mobile mech shooter with 300M+ registered players.",
+    description: "Designed UX for the game's meta layer: social systems, monetization, leaderboards, progression, and live events for a AAA mobile shooter with 300M+ players.",
     context: [
       "War Robots is a AAA mobile mech shooter — one of the longest-running mobile games on the market. 300M+ registered players, $1B+ in lifetime revenue.",
       "Over 4 years on the project, I designed UX across most parts of the game's meta layer. Across the project, I owned 500+ design tasks — features ranging from large multi-month epics (Clans 2.0, the new Bank, the black market rework) down to dozens of smaller fixes, polish iterations, and live-ops support.",
