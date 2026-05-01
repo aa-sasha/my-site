@@ -7,6 +7,7 @@ import {
 import { MotionConfig } from "motion/react";
 import { Home } from "./pages/Home";
 import { CaseStudy } from "./pages/CaseStudy";
+import { MusicPlayer } from "./components/MusicPlayer";
 
 function RootLayout() {
   return (
@@ -34,6 +35,8 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <RouterProvider router={router} />
+      {/* Music player lives outside the router so the track survives navigation */}
+      <MusicPlayer />
     </MotionConfig>
   );
 }

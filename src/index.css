@@ -4,27 +4,34 @@
 @theme {
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  
+
   --color-bg: #f8fafc;
-  --color-card: rgba(255, 255, 255, 0.6);
   --color-ink: #0f172a;
-  --color-muted: rgba(15, 23, 42, 0.6);
-  --color-line: rgba(0, 0, 0, 0.1);
   --color-primary: #007EFF;
-  
-  --radius-xl: 1.5rem;
+
   --radius-2xl: 2.5rem;
-  --blur-2xl: 10px;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply text-ink font-sans antialiased selection:bg-[#007EFF] selection:text-white;
     background-color: var(--color-bg);
+  }
+
+  /* Fixed background via pseudo-element — avoids iOS Safari background-attachment: fixed bug */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
     background-image: url('/background.svg');
     background-size: 200% auto;
-    background-attachment: fixed;
     background-position: center;
+    z-index: -2;
+    pointer-events: none;
   }
 
   /* Technical Grid Overlay */
@@ -32,7 +39,7 @@
     content: "";
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-image: 
+    background-image:
       linear-gradient(rgba(0, 126, 255, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0, 126, 255, 0.05) 1px, transparent 1px);
     background-size: 80px 80px;
@@ -41,7 +48,7 @@
     pointer-events: none;
   }
 
-  /* Slim scrollbar */
+  /* Slim scrollbar — visible on desktop, hidden on touch */
   @media (pointer: fine) {
     ::-webkit-scrollbar {
       width: 6px;
@@ -72,19 +79,28 @@
   }
 }
 
-/* Custom utilities */
-.border-line {
-  border-color: var(--color-line);
+/* Pulsing ring around status indicator dots — uses currentColor so it inherits dot color */
+.status-pulse {
+  position: relative;
+}
+.status-pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: status-pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  pointer-events: none;
+}
+@keyframes status-pulse-ring {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(2.6); opacity: 0; }
 }
 
-/* Custom glow animation / glossy effect */
-.glow-siemens {
-  box-shadow: 0 10px 25px rgba(0, 126, 255, 0.2), inset 0 2px 5px rgba(255, 255, 255, 0.9);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.glow-siemens:hover {
-  box-shadow: 0 15px 35px rgba(0, 126, 255, 0.3), inset 0 2px 5px rgba(255, 255, 255, 1);
-  transform: translateY(-2px);
+/* Pulsing ring around the music player while a track is playing */
+@keyframes music-ring {
+  0% { box-shadow: 0 0 0 0 rgba(0, 126, 255, 0.4); }
+  100% { box-shadow: 0 0 0 14px rgba(0, 126, 255, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -94,14 +110,4 @@
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .glow-siemens {
-    transition: none;
-  }
-}
-
-.text-mono {
-  font-family: var(--font-mono);
-}
-.text-sans {
-  font-family: var(--font-sans);
 }

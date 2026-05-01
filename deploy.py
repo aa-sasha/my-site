@@ -17,7 +17,6 @@ Optional:
 """
 
 import os
-import stat
 import subprocess
 import sys
 from pathlib import Path
@@ -139,14 +138,18 @@ def upload_nginx_conf(ssh: paramiko.SSHClient, sftp: paramiko.SFTPClient) -> Non
 
 def deploy() -> None:
     load_env_file(CREDENTIALS_FILE)
-    remote_path = os.environ.get("REMOTE_PATH", "/var/www/sasha-nikitin/beta")
+    remote_path = os.environ.get("REMOTE_PATH", "/var/www/sasha-nikitin")
 
     run_build()
 
     ssh = open_ssh()
     try:
-        print(f"Preparing remote {remote_path}...")
-        run_remote(ssh, f"rm -rf {remote_path} && mkdir -p {remote_path}")
+        print(f"Preparing remote {remote_path} (preserving /beta archive)...")
+        # Wipe top-level entries except the 'beta' folder so the archived v2 site stays put.
+        run_remote(
+            ssh,
+            f"mkdir -p {remote_path} && find {remote_path} -mindepth 1 -maxdepth 1 ! -name beta -exec rm -rf {{}} +",
+        )
 
         sftp = ssh.open_sftp()
         try:

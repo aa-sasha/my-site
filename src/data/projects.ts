@@ -14,6 +14,8 @@ export interface ProjectData {
   role: string;
   category: string;
   coverImage?: string;
+  /** Optional list of image paths shown in the "Design & Interface" gallery on the case page. */
+  gallery?: string[];
   description: string;
   context: string[];
   sections: ProjectSection[];
@@ -32,7 +34,7 @@ export const projects: ProjectData[] = [
     platform: "iOS, Android, Steam",
     role: "Senior Product Designer",
     category: "Game Design & Systems",
-    coverImage: "/1.png",
+    coverImage: "/project-war-robots.webp",
     description: "Designed UX for the game's meta layer: social systems, monetization, leaderboards, progression, and live events for a AAA mobile shooter with 300M+ players.",
     context: [
       "War Robots is a AAA mobile mech shooter — one of the longest-running mobile games on the market. 300M+ registered players, $1B+ in lifetime revenue.",
@@ -91,7 +93,7 @@ export const projects: ProjectData[] = [
     platform: "iOS & Android (native)",
     role: "Product Designer",
     category: "Geo-social Network",
-    coverImage: "/2.png",
+    coverImage: "/project-noomeera.webp",
     description: "Designed the full communication layer, granular privacy matrix, and iterative feed improvements for a geo-social network, improving App Store rating from 3.6 to 4.5.",
     context: [
       "Noomeera is a geo-social network for iOS and Android — a platform where users are visible on a map and can interact with people nearby.",
@@ -148,7 +150,7 @@ export const projects: ProjectData[] = [
     platform: "iOS & Android (native)",
     role: "Lead Product Designer",
     category: "Communication App",
-    coverImage: "/3.png",
+    coverImage: "/project-meera.webp",
     description: "Designed a full-featured messenger from scratch over a year, creating 50+ features and 500+ screens while optimizing complex components for scalable development.",
     context: [
       "Meera was a full-featured messenger for iOS and Android, designed entirely from scratch. The product was entering a competitive market alongside Telegram, WhatsApp, and Signal — which meant every feature had to work at industry standard from day one. There was no room for a rough first version.",
@@ -199,11 +201,11 @@ export const projects: ProjectData[] = [
     title: "AnnNigm — Non-invasive Health Monitoring",
     shortTitle: "AnnNigm",
     company: "AnnNigm",
-    period: "2023",
+    period: "2024",
     platform: "iOS & Android (native)",
     role: "Lead Product Designer",
     category: "HealthTech IoT",
-    coverImage: "/4.png",
+    coverImage: "/project-annnigm.webp",
     description: "Created a visual language for biochemical trend data that has no numerical values, using shapes, colors, and motion to clearly communicate actionable health insights.",
     context: [
       "AnnNigm is an application for non-invasive biochemical trend monitoring. A Bluetooth clip-on device tracks changes without finger pricks — unlike traditional glucometers or systems like FreeStyle Libre. The device costs approximately 10 times less than comparable alternatives.",
@@ -248,13 +250,13 @@ export const projects: ProjectData[] = [
     id: "05",
     slug: "techno-quiz",
     title: "Techno Quiz — Gamified Knowledge Mini-App for Yandex",
-    shortTitle: "Techno Quiz",
+    shortTitle: "Yandex Techno Quiz",
     company: "Yandex ТЕХНО",
-    period: "2024",
+    period: "2025",
     platform: "Telegram Mini-App",
     role: "Lead Product Designer",
     category: "Gamification & EdTech",
-    coverImage: "/5.png",
+    coverImage: "/project-technoquiz.webp",
     description: "Designed a 23-day seasonal gamified competition with narrative storytelling, daily tasks, varied quiz mechanics, and competitive leaderboards within a Telegram mini-app.",
     context: [
       "Techno Quiz is a gamified knowledge competition built as a Telegram mini-app for ТЕХНО — Yandex's technology media channel. The product ran as a 23-day seasonal event, combining daily quizzes, a narrative adventure world, a competitive leaderboard, and a tiered prize structure for top players.",

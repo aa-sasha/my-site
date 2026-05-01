@@ -43,15 +43,28 @@ export function CaseStudy() {
   return (
     <div className="min-h-screen pb-24 font-mono text-ink/90">
       {/* Top Header */}
-      <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-2xl border-b border-black/10">
+      <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-2xl">
         <div className="max-w-[800px] mx-auto px-6 py-4 flex justify-between items-center text-xs uppercase tracking-widest font-semibold">
-          <Link to="/" className="flex items-center gap-2 hover:text-primary transition-colors group">
-            <span className="group-hover:-translate-x-1 transition-transform">↤</span> Back
+          <Link to="/" className="group inline-flex items-center gap-2 hover:text-primary transition-colors">
+            <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-1">←</span>
+            Back
           </Link>
           <div className="flex items-center gap-6">
-            <a href={`${import.meta.env.BASE_URL}cv.pdf`} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Download CV</a>
-            <a href="mailto:sashanikitindesigner@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors group">
-              Contact <span className="group-hover:translate-x-1 transition-transform">↦</span>
+            <a
+              href="/cv.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 hover:text-primary transition-colors"
+            >
+              Download CV
+              <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0.5">↓</span>
+            </a>
+            <a
+              href="mailto:sashanikitindesigner@gmail.com"
+              className="group inline-flex items-center gap-2 hover:text-primary transition-colors"
+            >
+              Contact
+              <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
             </a>
           </div>
         </div>
@@ -74,11 +87,23 @@ export function CaseStudy() {
             </p>
           </motion.div>
           
-          <motion.div 
+          {project.coverImage && (
+            <motion.img
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              src={project.coverImage}
+              alt={project.shortTitle}
+              decoding="async"
+              className="mt-12 w-full h-auto"
+            />
+          )}
+
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-8 border-t border-black/10 text-sm font-mono"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-8 text-sm font-mono"
           >
             <div>
               <div className="text-ink/40 uppercase tracking-widest text-[10px] mb-2 font-bold">Category</div>
@@ -119,14 +144,24 @@ export function CaseStudy() {
           </section>
         ))}
 
-        {/* Design / Gallery Placeholder */}
-        <section className="flex flex-col gap-8 font-mono">
-          <h2 className="text-sm uppercase tracking-widest text-primary font-bold">Design & Interface</h2>
-          <div className="w-full aspect-[16/9] bg-white rounded-2xl border border-black/10 shadow-[0_8px_30px_rgba(0,126,255,0.15)] flex items-center justify-center relative overflow-hidden group">
-             <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,126,255,0.03)_50%)] bg-[length:100%_4px]"></div>
-             <p className="text-ink/30 uppercase tracking-widest text-xs z-10 font-bold">Image Placeholder</p>
-          </div>
-        </section>
+        {/* Design & Interface gallery — only renders if the project has images */}
+        {project.gallery && project.gallery.length > 0 && (
+          <section className="flex flex-col gap-8 font-mono">
+            <h2 className="text-sm uppercase tracking-widest text-primary font-bold">Design & Interface</h2>
+            <div className="flex flex-col gap-6">
+              {project.gallery.map((src, i) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`${project.shortTitle} — design ${i + 1}`}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-auto rounded-2xl border border-black/10 shadow-[0_8px_30px_rgba(0,126,255,0.15)]"
+                />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Results */}
         {project.results && project.results.length > 0 && (
@@ -140,7 +175,7 @@ export function CaseStudy() {
 
         {/* Reflection */}
         {project.reflection && project.reflection.length > 0 && (
-          <section className="flex flex-col md:flex-row gap-8 border-t border-black/10 pt-16 font-mono">
+          <section className="flex flex-col md:flex-row gap-8 pt-16 font-mono">
             <h2 className="md:w-1/3 shrink-0 text-sm uppercase tracking-widest text-primary font-bold">Reflection</h2>
             <div className="md:w-2/3 flex flex-col gap-6 text-ink/80 leading-relaxed italic">
               {project.reflection.map((p, i) => <p key={i}>{p}</p>)}
@@ -151,7 +186,7 @@ export function CaseStudy() {
       </main>
 
       {/* Next Case Footer */}
-      <footer className="mt-32 border-t border-black/10 bg-white/40 backdrop-blur-2xl">
+      <footer className="mt-32 bg-white/40 backdrop-blur-2xl">
         <Link 
           to={`/case/${nextProject.slug}`}
           className="block max-w-[800px] mx-auto px-6 py-24 group"
@@ -163,7 +198,7 @@ export function CaseStudy() {
               <p className="text-ink/70 mt-4 max-w-md font-mono">{nextProject.category}</p>
             </div>
             <div className="text-4xl text-ink/20 group-hover:text-primary group-hover:translate-x-4 transition-all">
-              ↳
+              →
             </div>
           </div>
         </Link>

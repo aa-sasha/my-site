@@ -1,41 +1,51 @@
 # Sasha Nikitin Portfolio (Site v3)
 
-This is the source code for my multi-page portfolio (v3), currently deployed to `sasha-nikitin.su/beta/`.
-The previous version (v2) is hosted at the root `sasha-nikitin.su`.
+Source for the multi-page portfolio currently deployed at the **root**:
+
+- `https://sasha-nikitin.su/` — v3 (this codebase)
+- `https://sasha-nikitin.su/beta/` — v2 (previous version, archived static HTML)
 
 ## Tech Stack
-- **Framework:** React 18 + Vite
-- **Routing:** React Router v7 (`HashRouter` or standard `BrowserRouter` depending on deployment path, currently using standard routing with `base: "/beta/"`)
-- **Styling:** Tailwind CSS (configured for "Chromecore" aesthetic)
-- **Animation:** Framer Motion (used for page transitions and complex scroll-driven effects)
-- **Deployment:** Custom Python script (`deploy.py`) that builds Vite and uploads artifacts to a remote VPS via SSH/SCP.
 
-## Architecture & Data Flow
-- `src/App.tsx`: Main routing setup. Uses `<ScrollToTop />` to ensure navigating between cases resets scroll position.
-- `src/pages/Home.tsx`: The main landing page. Uses a split layout with a fixed sidebar (left) and scrollable main content (right).
-- `src/pages/CaseStudy.tsx`: Dynamic template for project case studies. Retrieves project data by matching the `:slug` URL parameter against `src/data/projects.ts`.
-- `src/data/projects.ts`: The central source of truth for all project content. To add a new project, simply append it to the `projects` array here.
+- **Framework:** React 19 + Vite 6
+- **Routing:** React Router v7 (data router with `createBrowserRouter` + `ScrollRestoration`)
+- **Styling:** Tailwind CSS v4 (`@theme` config inline in `src/index.css`)
+- **Animation:** [`motion`](https://motion.dev) (formerly Framer Motion). All animations honor `prefers-reduced-motion` via a top-level `<MotionConfig reducedMotion="user">`.
+- **Deployment:** `deploy.py` — builds, uploads `dist/` to the VPS via paramiko, syncs nginx config, reloads.
 
-## Design Aesthetic ("Chromecore")
-This portfolio uses a highly specific visual language called "Chromecore", characterized by:
-1. **Deep Blue & Metallic Tones:** Primary background is deep blue (`bg-[#051c4a]`), cards use metallic gradients (`from-[#e0e5ec] to-[#f4f7f6]`).
-2. **Typography:** `font-mono` is heavily used for secondary text, labels, and descriptions to give an engineering/technical feel. Headings use strong, bold sans-serif.
-3. **No Intrusive Filters:** We deliberately removed CRT scanlines and heavy `mix-blend-mode` effects on images to ensure the UI design work remains clean, readable, and professional. Images are displayed in full color.
-4. **Borders & Shadows:** Cards use subtle inner borders (`border border-white/60`) and distinct shadows (`shadow-[0_10px_30px_rgba(0,0,0,0.3)]`) to separate them from the dark background.
+## Architecture
 
-## Key Mechanisms (For LLMs)
+- `src/App.tsx` — router, `MotionConfig`, `ScrollRestoration`.
+- `src/pages/Home.tsx` — landing. Sidebar pinned to viewport on desktop (`lg:fixed`), inline above content on mobile. Main content offset by `lg:ml-[350px]`.
+- `src/pages/CaseStudy.tsx` — case template. Pulls project by `:slug` from `src/data/projects.ts`.
+- `src/data/projects.ts` — single source of truth for project content. Add a new project by appending an entry. Optional `gallery: string[]` controls the "Design & Interface" section.
 
-### Deck-of-Cards Scroll Effect (`src/components/Projects.tsx`)
-The project cards on the homepage stack on top of each other like a deck of cards as the user scrolls.
-**How it works:**
-- Each card uses `sticky` positioning (`className="sticky"`).
-- The `top` offset is calculated dynamically: `top: calc(2rem + ${index * 8}px)`. This ensures each card stops slightly lower than the previous one, creating a visible "stack" at the top edge.
-- `z-index` is incremented based on the index (`zIndex: index + 10`) so later cards overlap earlier ones.
-- **Scale Animation:** Framer Motion's `useScroll` and `useTransform` are used to slightly shrink cards as the user scrolls further down. The formula `1 - ((total - index) * 0.025)` reduces scale by 2.5% per card level, creating a 3D depth effect. 
-- **Card Heights:** It is *critical* that all cards have exactly the same height. If one card is taller (e.g., longer text), its sticky container will exhaust earlier, causing it to scroll out of view asynchronously. Text lengths in `projects.ts` must be balanced.
-- **Runway:** The parent container does *not* use a padding-bottom hack anymore. The gap between cards and equal heights ensure they unstick simultaneously when the user reaches the end of the section.
+## Components
 
-## How to Deploy
-1. Ensure `Credentials.env` contains the correct SSH details (not tracked in git).
-2. Run `python deploy.py`.
-3. The script will run `npm run build`, connect to the VPS via `paramiko`, upload `dist/` to `/var/www/sasha-nikitin/beta/`, and restart Nginx.
+- `Sidebar` — sticky profile/nav/CV column. Live Yerevan time + availability glyph (green/orange/red, color via `currentColor` on a single shared SVG).
+- `Hero` — landing intro with linear count-up stats.
+- `Projects` — sticky "deck-of-cards" stack. Each card has a custom cursor that says "Open Case ↦".
+- `Experience` — work + teaching + contacts.
+- `SectionHeading` — small reusable eyebrow heading with view-triggered fade.
+- `MagneticLink` — anchor that gently follows the cursor (used on CV / contact CTAs).
+- `MusicPlayer` — floating ambient-music widget mounted in `App` (outside the router) so the track survives navigation. UX: first click anywhere starts the track; once the user explicitly pauses via the widget, auto-on-click is disabled forever (persisted in `localStorage`). Default volume `0.1`, loops, `preload="metadata"` so the 940 KB MP3 only downloads on play.
+
+### Deck-of-cards mechanic
+
+Each project card is `position: sticky` with `top` calculated as `2rem + index * 8px`, and `z-index: index + 10`. As the user scrolls, Framer Motion's `useScroll` + `useTransform` shrinks each card by `(total - index) * 0.025`, giving a 3D depth effect. The last card uses `relative` instead of `sticky` so the stack unsticks together. Cards have a fixed `min-h-[640px]` and use `mt-auto` on the description so all cards visually align even with varied text lengths.
+
+## Deploy
+
+1. Copy `Credentials.env.example` → `Credentials.env` and fill in SSH details (host, user, key path or password). The file is gitignored.
+2. Run `python deploy.py`. The script:
+   - runs `npm run build`
+   - SSHs into the VPS
+   - safely wipes the deployment root **excluding the `/beta` archive** (`find {root} -mindepth 1 -maxdepth 1 ! -name beta -exec rm -rf {} +`)
+   - uploads `dist/` to `/var/www/sasha-nikitin/`
+   - rewrites the nginx site config and reloads
+
+The `/beta` archive is left untouched between deploys. If you ever need to refresh it, copy the v2 source manually with sftp or write a one-off script.
+
+### Cloudflare cache
+
+The site is fronted by Cloudflare. Static assets (PDF, images) get a 4h cache. After a deploy, force-refresh with `?v=<anything>` or purge in the Cloudflare dashboard if you need users to see updates immediately.
