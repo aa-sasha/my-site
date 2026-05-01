@@ -1,14 +1,39 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  ScrollRestoration,
+  Outlet,
+} from "react-router-dom";
+import { MotionConfig } from "motion/react";
 import { Home } from "./pages/Home";
 import { CaseStudy } from "./pages/CaseStudy";
 
+function RootLayout() {
+  return (
+    <>
+      <ScrollRestoration />
+      <Outlet />
+    </>
+  );
+}
+
+const router = createBrowserRouter(
+  [
+    {
+      element: <RootLayout />,
+      children: [
+        { path: "/", element: <Home /> },
+        { path: "/case/:slug", element: <CaseStudy /> },
+      ],
+    },
+  ],
+  { basename: import.meta.env.BASE_URL.replace(/\/$/, "") || "/" }
+);
+
 export default function App() {
   return (
-    <Router basename="/beta">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/case/:slug" element={<CaseStudy />} />
-      </Routes>
-    </Router>
+    <MotionConfig reducedMotion="user">
+      <RouterProvider router={router} />
+    </MotionConfig>
   );
 }

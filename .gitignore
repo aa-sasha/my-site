@@ -6,3 +6,5 @@ coverage/
 *.log
 .env*
 !.env.example
+Credentials.env
+!Credentials.env.example

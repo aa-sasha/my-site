@@ -1,23 +1,23 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export function Hero() {
   return (
     <section className="pt-8 pb-12">
-      <motion.h2 
+      <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="text-4xl lg:text-6xl font-black mb-6 tracking-tighter leading-tight uppercase text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+        className="text-4xl lg:text-6xl font-black mb-6 tracking-tighter leading-tight uppercase text-ink"
       >
         Hi there!<br />
         I'm Sasha Nikitin
-      </motion.h2>
+      </motion.h1>
       
       <motion.p 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className="text-xl lg:text-2xl text-white/80 leading-relaxed max-w-2xl font-mono tracking-wide"
+        className="text-xl lg:text-2xl text-ink/80 leading-relaxed max-w-2xl font-mono tracking-wide"
       >
         10 years in design — 8 in product and UX, with expertise in building social features, communication systems, and monetization mechanics.
       </motion.p>
@@ -29,12 +29,12 @@ export function Hero() {
         className="flex gap-12 mt-12 pt-12 border-t border-line"
       >
         <div>
-          <div className="text-5xl font-black text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">10+</div>
-          <div className="text-sm text-white/60 mt-2 font-mono uppercase tracking-widest">Years Experience</div>
+          <div className="text-5xl font-black text-ink">10+</div>
+          <div className="text-sm text-ink/60 mt-2 font-mono uppercase tracking-widest font-bold">Years Experience</div>
         </div>
         <div>
-          <div className="text-5xl font-black text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">50+</div>
-          <div className="text-sm text-white/60 mt-2 font-mono uppercase tracking-widest">Global Projects</div>
+          <div className="text-5xl font-black text-ink">50+</div>
+          <div className="text-sm text-ink/60 mt-2 font-mono uppercase tracking-widest font-bold">Global Projects</div>
         </div>
       </motion.div>
     </section>

@@ -32,7 +32,7 @@ export const projects: ProjectData[] = [
     platform: "iOS, Android, Steam",
     role: "Senior Product Designer",
     category: "Game Design & Systems",
-    coverImage: "/2.webp",
+    coverImage: "/1.png",
     description: "Designed UX for the game's meta layer: social systems, monetization, leaderboards, progression, and live events for a AAA mobile shooter with 300M+ players.",
     context: [
       "War Robots is a AAA mobile mech shooter — one of the longest-running mobile games on the market. 300M+ registered players, $1B+ in lifetime revenue.",
@@ -91,7 +91,7 @@ export const projects: ProjectData[] = [
     platform: "iOS & Android (native)",
     role: "Product Designer",
     category: "Geo-social Network",
-    coverImage: "/5.webp",
+    coverImage: "/2.png",
     description: "Designed the full communication layer, granular privacy matrix, and iterative feed improvements for a geo-social network, improving App Store rating from 3.6 to 4.5.",
     context: [
       "Noomeera is a geo-social network for iOS and Android — a platform where users are visible on a map and can interact with people nearby.",
@@ -148,7 +148,7 @@ export const projects: ProjectData[] = [
     platform: "iOS & Android (native)",
     role: "Lead Product Designer",
     category: "Communication App",
-    coverImage: "/4.webp",
+    coverImage: "/3.png",
     description: "Designed a full-featured messenger from scratch over a year, creating 50+ features and 500+ screens while optimizing complex components for scalable development.",
     context: [
       "Meera was a full-featured messenger for iOS and Android, designed entirely from scratch. The product was entering a competitive market alongside Telegram, WhatsApp, and Signal — which meant every feature had to work at industry standard from day one. There was no room for a rough first version.",
@@ -203,7 +203,7 @@ export const projects: ProjectData[] = [
     platform: "iOS & Android (native)",
     role: "Lead Product Designer",
     category: "HealthTech IoT",
-    coverImage: "/3.webp",
+    coverImage: "/4.png",
     description: "Created a visual language for biochemical trend data that has no numerical values, using shapes, colors, and motion to clearly communicate actionable health insights.",
     context: [
       "AnnNigm is an application for non-invasive biochemical trend monitoring. A Bluetooth clip-on device tracks changes without finger pricks — unlike traditional glucometers or systems like FreeStyle Libre. The device costs approximately 10 times less than comparable alternatives.",
@@ -254,7 +254,7 @@ export const projects: ProjectData[] = [
     platform: "Telegram Mini-App",
     role: "Lead Product Designer",
     category: "Gamification & EdTech",
-    coverImage: "/1.webp",
+    coverImage: "/5.png",
     description: "Designed a 23-day seasonal gamified competition with narrative storytelling, daily tasks, varied quiz mechanics, and competitive leaderboards within a Telegram mini-app.",
     context: [
       "Techno Quiz is a gamified knowledge competition built as a Telegram mini-app for ТЕХНО — Yandex's technology media channel. The product ran as a 23-day seasonal event, combining daily quizzes, a narrative adventure world, a competitive leaderboard, and a tiered prize structure for top players.",

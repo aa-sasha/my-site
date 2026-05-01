@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export function Experience() {
   const experiences = [
@@ -34,7 +34,7 @@ export function Experience() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
-        className="text-sm text-white/60 mb-12 tracking-widest uppercase font-mono"
+        className="text-sm text-primary font-bold mb-12 tracking-widest uppercase font-mono"
       >
         Work Experience
       </motion.h3>
@@ -50,12 +50,12 @@ export function Experience() {
             className="flex flex-col md:flex-row gap-4 md:gap-12"
           >
             <div className="md:w-1/3 shrink-0">
-              <div className="text-sm text-white/70 mb-1 font-mono">{exp.period}</div>
-              <h4 className="text-xl font-black text-white uppercase tracking-wide">{exp.company}</h4>
-              <div className="text-sm text-white/80 font-mono mt-1">{exp.role}</div>
+              <div className="text-sm text-ink/60 mb-1 font-mono font-medium">{exp.period}</div>
+              <h4 className="text-xl font-black text-ink uppercase tracking-wide">{exp.company}</h4>
+              <div className="text-sm text-primary/90 font-mono mt-1 font-bold">{exp.role}</div>
             </div>
             <div className="md:w-2/3">
-              <p className="text-white/70 leading-relaxed text-sm font-mono">{exp.description}</p>
+              <p className="text-ink/70 leading-relaxed text-sm font-mono">{exp.description}</p>
             </div>
           </motion.div>
         ))}
@@ -70,13 +70,13 @@ export function Experience() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="mt-24 pt-12 border-t border-line scroll-mt-24"
       >
-        <h3 className="text-sm text-white/60 mb-8 tracking-widest uppercase font-mono">Contacts</h3>
-        <div className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter mb-8 leading-tight">
+        <h3 className="text-sm text-primary font-bold mb-8 tracking-widest uppercase font-mono">Contacts</h3>
+        <div className="text-2xl md:text-5xl font-black text-ink uppercase tracking-tighter mb-8 leading-tight">
           Let's create something<br />amazing together.
         </div>
         <a 
           href="mailto:sashanikitindesigner@gmail.com" 
-          className="inline-flex items-center justify-center bg-white text-black px-8 py-4 rounded-full font-black text-sm uppercase tracking-widest shadow-[0_0_20px_rgba(255,255,255,0.6)] hover:shadow-[0_0_30px_rgba(255,255,255,1)] hover:scale-105 active:scale-95 transition-all"
+          className="inline-flex items-center justify-center bg-primary text-white px-8 py-4 rounded-[1.25rem] font-black text-sm uppercase tracking-widest shadow-[0_8px_20px_rgba(0,126,255,0.3),_inset_0_2px_4px_rgba(255,255,255,0.4)] hover:shadow-[0_12px_25px_rgba(0,126,255,0.5),_inset_0_2px_4px_rgba(255,255,255,0.6)] hover:-translate-y-0.5 active:translate-y-0 transition-all"
         >
           sashanikitindesigner@gmail.com
         </a>
