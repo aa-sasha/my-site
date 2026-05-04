@@ -16,6 +16,8 @@ export interface ProjectData {
   coverImage?: string;
   /** Optional list of image paths shown in the "Design & Interface" gallery on the case page. */
   gallery?: string[];
+  /** Optional brand tint (hex with #). Subtly mixed into the project card on the home page. */
+  tint?: string;
   description: string;
   context: string[];
   sections: ProjectSection[];

@@ -44,20 +44,26 @@ const Card = ({ project, index, progress, total }: CardProps) => {
 
   // Lighter blur on cards — backdrop-filter is expensive when applied to 5 sticky elements.
   // Keep heavier blur only on Sidebar / page headers.
-  const bgColor = "bg-white/70 backdrop-blur-md";
+  // Optional brand tint: subtle diagonal gradient layered on top of the white glass.
+  // `26` after the hex = ~15% opacity → enough to feel the color, light enough to keep
+  // text legible and the card recognizably part of the same family.
+  const tintBackground = project.tint
+    ? `linear-gradient(135deg, ${project.tint}26 0%, rgba(255,255,255,0) 65%), rgba(255,255,255,0.7)`
+    : undefined;
 
   return (
-    <MotionLink 
+    <MotionLink
       to={`/case/${project.slug}`}
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`${isLast ? "relative" : "sticky"} flex flex-col gap-6 pt-10 pb-12 px-8 w-full min-h-[640px] origin-top rounded-[var(--radius-2xl)] border border-white shadow-[0_12px_40px_rgba(0,126,255,0.1),_inset_0_1px_0_rgba(255,255,255,1)] text-ink ${bgColor} cursor-none overflow-hidden group no-underline`}
-      style={{ 
-        top: isLast ? undefined : `calc(2rem + ${index * 8}px)`, 
+      className={`${isLast ? "relative" : "sticky"} flex flex-col gap-6 pt-10 pb-12 px-8 w-full min-h-[640px] origin-top rounded-[var(--radius-2xl)] border border-white shadow-[0_12px_40px_rgba(0,126,255,0.1),_inset_0_1px_0_rgba(255,255,255,1)] text-ink ${tintBackground ? "" : "bg-white/70"} backdrop-blur-md cursor-none overflow-hidden group no-underline`}
+      style={{
+        top: isLast ? undefined : `calc(2rem + ${index * 8}px)`,
         zIndex: index + 10,
         scale: isLast ? 1 : scale,
+        background: tintBackground,
       }}
     >
       {/* Custom Cursor — always mounted, only opacity/scale toggle on hover.
@@ -65,7 +71,7 @@ const Card = ({ project, index, progress, total }: CardProps) => {
       <motion.div
         animate={{ scale: isHovered ? 1 : 0, opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-none absolute z-50 flex items-center justify-center bg-primary text-white font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded-full shadow-lg whitespace-nowrap"
+        className="pointer-events-none absolute z-50 flex items-center justify-center bg-primary text-white font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded-full shadow-[0_8px_20px_rgba(0,126,255,0.3),_inset_0_2px_4px_rgba(255,255,255,0.4)] whitespace-nowrap"
         style={{
           left: cursorX,
           top: cursorY,
@@ -73,7 +79,7 @@ const Card = ({ project, index, progress, total }: CardProps) => {
           y: "-50%",
         }}
       >
-        Open Case ↦
+        Open Case →
       </motion.div>
 
       <div className="flex flex-col gap-2 pointer-events-none">
