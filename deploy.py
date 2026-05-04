@@ -12,7 +12,7 @@ Auth — pick ONE:
     SSH_PASSWORD       password fallback (avoid)
 
 Optional:
-    REMOTE_PATH        remote dir, default /var/www/sasha-nikitin/beta
+    REMOTE_PATH        remote dir, default /var/www/sasha-nikitin
     SSH_PORT           ssh port, default 22
 """
 
@@ -115,11 +115,6 @@ NGINX_CONF = """server {
         try_files $uri $uri/ /index.html;
     }
 
-    location ^~ /beta {
-        alias /var/www/sasha-nikitin/beta;
-        try_files $uri $uri/ /beta/index.html;
-    }
-
     gzip on;
     gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
 }
@@ -144,11 +139,10 @@ def deploy() -> None:
 
     ssh = open_ssh()
     try:
-        print(f"Preparing remote {remote_path} (preserving /beta archive)...")
-        # Wipe top-level entries except the 'beta' folder so the archived v2 site stays put.
+        print(f"Preparing remote {remote_path}...")
         run_remote(
             ssh,
-            f"mkdir -p {remote_path} && find {remote_path} -mindepth 1 -maxdepth 1 ! -name beta -exec rm -rf {{}} +",
+            f"mkdir -p {remote_path} && find {remote_path} -mindepth 1 -maxdepth 1 -exec rm -rf {{}} +",
         )
 
         sftp = ssh.open_sftp()

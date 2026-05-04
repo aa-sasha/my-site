@@ -1,9 +1,6 @@
 # Sasha Nikitin Portfolio (Site v3)
 
-Source for the multi-page portfolio currently deployed at the **root**:
-
-- `https://sasha-nikitin.su/` — v3 (this codebase)
-- `https://sasha-nikitin.su/beta/` — v2 (previous version, archived static HTML)
+Source for the portfolio deployed at **`https://sasha-nikitin.su/`**.
 
 ## Tech Stack
 
@@ -40,11 +37,8 @@ Each project card is `position: sticky` with `top` calculated as `2rem + index *
 2. Run `python deploy.py`. The script:
    - runs `npm run build`
    - SSHs into the VPS
-   - safely wipes the deployment root **excluding the `/beta` archive** (`find {root} -mindepth 1 -maxdepth 1 ! -name beta -exec rm -rf {} +`)
-   - uploads `dist/` to `/var/www/sasha-nikitin/`
+   - safely wipes the deployment root and uploads `dist/` to `/var/www/sasha-nikitin/`
    - rewrites the nginx site config and reloads
-
-The `/beta` archive is left untouched between deploys. If you ever need to refresh it, copy the v2 source manually with sftp or write a one-off script.
 
 ### Cloudflare cache
 
