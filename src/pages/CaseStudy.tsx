@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { Fragment, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { projects } from "../data/projects";
+import { EASE_OUT_EXPO } from "../lib/easing";
 
 function renderRichParagraph(text: string, key: number): ReactNode {
   if (text.startsWith("**") && text.endsWith("**") && text.indexOf("**", 2) === text.length - 2) {
@@ -91,7 +92,7 @@ export function CaseStudy() {
             <motion.img
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: 0.15, ease: EASE_OUT_EXPO }}
               src={project.coverImage}
               alt={project.shortTitle}
               decoding="async"

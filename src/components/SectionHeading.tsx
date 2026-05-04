@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { EASE_OUT_EXPO } from "../lib/easing";
 
 /**
  * Section eyebrow heading that fades + slides in once it enters view.
@@ -10,7 +11,7 @@ export function SectionHeading({ children }: { children: React.ReactNode }) {
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
       className="text-sm text-primary font-bold mb-8 tracking-widest uppercase font-mono"
     >
       {children}

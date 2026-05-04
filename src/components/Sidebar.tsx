@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { MagneticLink } from "./MagneticLink";
+import { PrimaryButton } from "./PrimaryButton";
 
 const SOCIAL_LINKS: Array<{ label: string; href: string }> = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/sashanikitin/" },
@@ -191,18 +191,12 @@ export function Sidebar() {
 
       {/* CV Button */}
       <div className="lg:mt-auto">
-        <MagneticLink
-          href="/cv.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          strength={0.3}
-          className="group flex w-full items-center justify-center gap-2 bg-primary text-white px-6 py-4 rounded-[1.25rem] font-black text-sm uppercase tracking-widest shadow-[0_8px_20px_rgba(0,126,255,0.3),_inset_0_2px_4px_rgba(255,255,255,0.4)] hover:shadow-[0_12px_25px_rgba(0,126,255,0.5),_inset_0_2px_4px_rgba(255,255,255,0.6)] transition-shadow"
-        >
+        <PrimaryButton href="/cv.pdf" target="_blank" rel="noopener noreferrer" strength={0.3} fullWidth>
           Download CV
           <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-1">
             ↓
           </span>
-        </MagneticLink>
+        </PrimaryButton>
       </div>
     </motion.aside>
   );

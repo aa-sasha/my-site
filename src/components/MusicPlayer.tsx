@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
+import { EASE_OUT_EXPO } from "../lib/easing";
 
 const TRACK_SRC = "/sasha.mp3";
 const TRACK_TITLE = "Ambient by Sasha";
@@ -119,7 +120,7 @@ export function MusicPlayer() {
         ref={widgetRef}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.6, delay: 1, ease: EASE_OUT_EXPO }}
         className="fixed bottom-6 right-6 z-[60]"
       >
         <button

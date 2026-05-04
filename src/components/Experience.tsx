@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { SectionHeading } from "./SectionHeading";
-import { MagneticLink } from "./MagneticLink";
+import { PrimaryButton } from "./PrimaryButton";
+import { EASE_OUT_EXPO } from "../lib/easing";
 
 export function Experience() {
   const experiences = [
@@ -46,7 +47,7 @@ export function Experience() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: index * 0.1, ease: EASE_OUT_EXPO }}
             className="flex flex-col md:flex-row gap-4 md:gap-12"
           >
             <div className="md:w-1/3 shrink-0">
@@ -72,7 +73,7 @@ export function Experience() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: index * 0.1, ease: EASE_OUT_EXPO }}
             className="flex flex-col md:flex-row gap-4 md:gap-12"
           >
             <div className="md:w-1/3 shrink-0">
@@ -93,23 +94,19 @@ export function Experience() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, ease: EASE_OUT_EXPO }}
         className="mt-24 pt-12 scroll-mt-24"
       >
         <SectionHeading>Contacts</SectionHeading>
         <div className="text-2xl md:text-5xl font-black text-ink uppercase tracking-tighter mb-8 leading-tight">
           Let's create something<br />amazing together.
         </div>
-        <MagneticLink
-          href="mailto:sashanikitindesigner@gmail.com"
-          strength={0.2}
-          className="group inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-[1.25rem] font-black text-sm uppercase tracking-widest shadow-[0_8px_20px_rgba(0,126,255,0.3),_inset_0_2px_4px_rgba(255,255,255,0.4)] hover:shadow-[0_12px_25px_rgba(0,126,255,0.5),_inset_0_2px_4px_rgba(255,255,255,0.6)] transition-shadow"
-        >
+        <PrimaryButton href="mailto:sashanikitindesigner@gmail.com" strength={0.2}>
           sashanikitindesigner@gmail.com
           <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
             ↗
           </span>
-        </MagneticLink>
+        </PrimaryButton>
       </motion.div>
     </section>
   );

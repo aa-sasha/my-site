@@ -4,10 +4,32 @@ import { useRef, useState } from "react";
 import { projects, type ProjectData } from "../data/projects";
 import { Link } from "react-router-dom";
 import { SectionHeading } from "./SectionHeading";
+import { EASE_OUT_EXPO } from "../lib/easing";
 
 // Created once outside component — motion() returns a new forwardRef component,
 // so it must never be called inside a render function.
 const MotionLink = motion(Link);
+
+function CustomCursor({
+  isHovered,
+  cursorX,
+  cursorY,
+}: {
+  isHovered: boolean;
+  cursorX: MotionValue<number>;
+  cursorY: MotionValue<number>;
+}) {
+  return (
+    <motion.div
+      animate={{ scale: isHovered ? 1 : 0, opacity: isHovered ? 1 : 0 }}
+      transition={{ duration: 0.2, ease: EASE_OUT_EXPO }}
+      className="pointer-events-none absolute z-50 flex items-center justify-center bg-primary text-white font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded-full shadow-[0_8px_20px_rgba(0,126,255,0.3),_inset_0_2px_4px_rgba(255,255,255,0.4)] whitespace-nowrap"
+      style={{ left: cursorX, top: cursorY, x: "-50%", y: "-50%" }}
+    >
+      Open Case →
+    </motion.div>
+  );
+}
 
 interface CardProps {
   project: ProjectData;
@@ -68,19 +90,7 @@ const Card = ({ project, index, progress, total }: CardProps) => {
     >
       {/* Custom Cursor — always mounted, only opacity/scale toggle on hover.
           Avoids re-mounting motion springs on every mouseenter/leave. */}
-      <motion.div
-        animate={{ scale: isHovered ? 1 : 0, opacity: isHovered ? 1 : 0 }}
-        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-none absolute z-50 flex items-center justify-center bg-primary text-white font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded-full shadow-[0_8px_20px_rgba(0,126,255,0.3),_inset_0_2px_4px_rgba(255,255,255,0.4)] whitespace-nowrap"
-        style={{
-          left: cursorX,
-          top: cursorY,
-          x: "-50%",
-          y: "-50%",
-        }}
-      >
-        Open Case →
-      </motion.div>
+      <CustomCursor isHovered={isHovered} cursorX={cursorX} cursorY={cursorY} />
 
       <div className="flex flex-col gap-2 pointer-events-none">
         <div className="text-sm text-primary/80 font-mono tracking-widest font-bold">{project.id}</div>

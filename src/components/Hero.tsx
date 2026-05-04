@@ -6,6 +6,7 @@ import {
   useMotionValue,
   useTransform,
 } from "motion/react";
+import { EASE_OUT_EXPO } from "../lib/easing";
 
 /** Animated number that counts up from 0 to `to` once it scrolls into view. */
 function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
@@ -34,7 +35,7 @@ export function Hero() {
       <motion.h1
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 1.1, ease: EASE_OUT_EXPO }}
         className="text-4xl lg:text-6xl font-black mb-6 tracking-tighter leading-tight uppercase text-ink"
       >
         Hi there!<br />
@@ -44,7 +45,7 @@ export function Hero() {
       <motion.p
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 1.1, delay: 0.25, ease: EASE_OUT_EXPO }}
         className="text-xl lg:text-2xl text-ink/80 leading-relaxed max-w-2xl font-mono tracking-wide"
       >
         10 years in design — 8 in product and UX, with expertise in building social features, communication systems, and monetization mechanics.
@@ -53,7 +54,7 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, delay: 0.2, ease: EASE_OUT_EXPO }}
         className="flex gap-12 mt-12 pt-12"
       >
         <div>
