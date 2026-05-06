@@ -19,6 +19,8 @@
   body {
     @apply text-ink font-sans antialiased selection:bg-[#007EFF] selection:text-white;
     background-color: var(--color-bg);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   /* Fixed background via pseudo-element — avoids iOS Safari background-attachment: fixed bug */
