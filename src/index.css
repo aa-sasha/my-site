@@ -21,18 +21,10 @@
   body {
     @apply text-ink font-sans antialiased selection:bg-[#007EFF] selection:text-white;
     background-color: var(--color-bg);
-  }
-
-  /* Fixed background via pseudo-element — avoids iOS Safari background-attachment: fixed bug */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
     background-image: url('/background.svg');
-    background-size: 200% auto;
-    background-position: center;
-    z-index: -2;
-    pointer-events: none;
+    background-size: 600% auto;
+    background-position: center top;
+    background-repeat: repeat;
   }
 
   /* Technical Grid Overlay */
