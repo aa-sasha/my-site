@@ -42,7 +42,7 @@ export function CaseStudy() {
   const nextProject = projects[currentIndex + 1] || projects[0];
 
   return (
-    <div className="min-h-[100dvh] pb-24 font-mono text-ink/90">
+    <div className="min-h-screen pb-24 font-mono text-ink/90">
       {/* Top Header */}
       <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-2xl">
         <div className="max-w-[800px] mx-auto px-6 py-4 flex justify-between items-center text-xs uppercase tracking-widest font-semibold">

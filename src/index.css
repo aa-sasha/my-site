@@ -14,17 +14,23 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Keep anchor jumps clear of iOS Safari URL bar / dynamic island */
-    scroll-padding-top: 5rem;
   }
 
   body {
     @apply text-ink font-sans antialiased selection:bg-[#007EFF] selection:text-white;
     background-color: var(--color-bg);
+  }
+
+  /* Fixed background via pseudo-element — avoids iOS Safari background-attachment: fixed bug */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
     background-image: url('/background.svg');
-    background-size: 600% auto;
-    background-position: center top;
-    background-repeat: repeat;
+    background-size: 200% auto;
+    background-position: center;
+    z-index: -2;
+    pointer-events: none;
   }
 
   /* Technical Grid Overlay */
