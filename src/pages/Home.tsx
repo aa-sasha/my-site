@@ -5,7 +5,7 @@ import { Experience } from "../components/Experience";
 
 export function Home() {
   return (
-    <div className="min-h-screen pb-20">
+    <div className="min-h-[100dvh] pb-20">
       {/* Sidebar pinned to viewport edge on desktop, inline on mobile */}
       <Sidebar />
 
