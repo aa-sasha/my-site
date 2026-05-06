@@ -14,6 +14,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Keep anchor jumps clear of iOS Safari URL bar / dynamic island */
+    scroll-padding-top: max(env(safe-area-inset-top), 5rem);
   }
 
   body {

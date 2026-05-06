@@ -11,7 +11,7 @@ export function Home() {
 
       {/* Main content offset by sidebar width on desktop */}
       <main className="lg:ml-[350px]">
-        <div className="max-w-[900px] mx-auto px-6 lg:px-12 pt-12 lg:pt-24 flex flex-col gap-24">
+        <div className="max-w-[900px] mx-auto px-6 lg:px-12 pt-20 lg:pt-24 flex flex-col gap-24">
           <Hero />
           <Projects />
           <Experience />
