@@ -14,15 +14,14 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    background-color: var(--color-bg);
     /* Keep anchor jumps clear of iOS Safari URL bar / dynamic island */
-    scroll-padding-top: max(env(safe-area-inset-top), 5rem);
+    scroll-padding-top: 5rem;
   }
 
   body {
     @apply text-ink font-sans antialiased selection:bg-[#007EFF] selection:text-white;
     background-color: var(--color-bg);
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
   }
 
   /* Fixed background via pseudo-element — avoids iOS Safari background-attachment: fixed bug */
