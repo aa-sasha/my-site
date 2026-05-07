@@ -21,7 +21,9 @@
     background-color: var(--color-bg);
   }
 
-  /* Fixed background via pseudo-element — avoids iOS Safari background-attachment: fixed bug */
+  /* Fixed background via pseudo-element — avoids iOS Safari background-attachment: fixed bug.
+     translateY(--bg-offset) lets the bg scroll WITH content for the first 140px,
+     then locks (set by useScrollingBackground in App.tsx). */
   body::before {
     content: "";
     position: fixed;
@@ -31,6 +33,8 @@
     background-position: center;
     z-index: -2;
     pointer-events: none;
+    transform: translateY(var(--bg-offset, 0px));
+    will-change: transform;
   }
 
   /* Technical Grid Overlay */
