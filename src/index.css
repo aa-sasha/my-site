@@ -41,6 +41,7 @@
     pointer-events: none;
     transform: translateY(var(--bg-offset, 0px));
     will-change: transform;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   /* Mobile: scale up so the pattern's natural aspect ratio is preserved

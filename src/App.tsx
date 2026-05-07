@@ -33,18 +33,27 @@ const router = createBrowserRouter(
 );
 
 /** Mobile only: scrolls the fixed background up with the page for the first
- * 140px, then locks it in place. Desktop keeps a normal fixed parallax bg.
- * Reads window.scrollY in rAF to avoid jank. */
+ * 140px, then locks it in place. The offset is sticky — once it reaches a
+ * value it doesn't go back unless the user scrolls all the way to the top.
+ * That way scrolling up mid-page doesn't reset the bg position. */
 function useScrollingBackground() {
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 639px)");
     if (!mq.matches) return;
 
     const LOCK = 140;
+    let currentOffset = 0;
     let raf = 0;
     const update = () => {
-      const offset = Math.min(window.scrollY, LOCK);
-      document.documentElement.style.setProperty("--bg-offset", `-${offset}px`);
+      const y = window.scrollY;
+      if (y <= 0) {
+        // back at the top — release the bg so it returns to its origin
+        currentOffset = 0;
+      } else {
+        // ratchet up only: never decrease until y hits 0
+        currentOffset = Math.max(currentOffset, Math.min(y, LOCK));
+      }
+      document.documentElement.style.setProperty("--bg-offset", `-${currentOffset}px`);
       raf = 0;
     };
     const onScroll = () => {
