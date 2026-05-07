@@ -43,11 +43,14 @@
     will-change: transform;
   }
 
-  /* Mobile viewport is narrow — scale the pattern up so a single tile covers
-     the screen with no visible seams. Desktop keeps 200%. */
+  /* Mobile: scale up so the pattern's natural aspect ratio is preserved
+     (no stretch artifacts). Center the image; let it overflow the viewport
+     on top/bottom — body's bg-color shows through transparent SVG areas. */
   @media (max-width: 639px) {
     body::before {
-      background-size: 200% 100%;
+      background-size: auto 140%;
+      background-position: center;
+      background-color: var(--color-bg);
     }
   }
 
