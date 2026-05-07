@@ -23,25 +23,31 @@
 
   /* Fixed background via pseudo-element — avoids iOS Safari background-attachment: fixed bug.
      translateY(--bg-offset) lets the bg scroll WITH content for the first 140px,
-     then locks (set by useScrollingBackground in App.tsx). */
+     then locks (set by useScrollingBackground in App.tsx).
+     Bottom is extended by 200px so when translated up the bottom edge of the
+     viewport stays covered (no horizontal seam). */
   body::before {
     content: "";
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -200px;
     background-image: url('/background.svg');
     background-size: 200% auto;
     background-position: center;
+    background-repeat: no-repeat;
     z-index: -2;
     pointer-events: none;
     transform: translateY(var(--bg-offset, 0px));
     will-change: transform;
   }
 
-  /* Mobile viewport is much narrower — at 200% the pattern tiles visibly.
-     Scale up so a single tile dominates the screen. Desktop unchanged. */
+  /* Mobile viewport is much narrower — scale the pattern so a single tile
+     covers the screen with no visible seams. Desktop keeps 200%. */
   @media (max-width: 639px) {
     body::before {
-      background-size: 600% auto;
+      background-size: cover;
     }
   }
 

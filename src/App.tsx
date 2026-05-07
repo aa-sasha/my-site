@@ -32,11 +32,14 @@ const router = createBrowserRouter(
   { basename: import.meta.env.BASE_URL.replace(/\/$/, "") || "/" }
 );
 
-/** Scrolls the fixed background up with the page for the first 140px,
- * then locks it in place. Reads window.scrollY in rAF to avoid jank.
- * The body::before pseudo-element reads --bg-offset and applies translateY. */
+/** Mobile only: scrolls the fixed background up with the page for the first
+ * 140px, then locks it in place. Desktop keeps a normal fixed parallax bg.
+ * Reads window.scrollY in rAF to avoid jank. */
 function useScrollingBackground() {
   useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    if (!mq.matches) return;
+
     const LOCK = 140;
     let raf = 0;
     const update = () => {
@@ -53,6 +56,7 @@ function useScrollingBackground() {
     return () => {
       window.removeEventListener("scroll", onScroll);
       if (raf) cancelAnimationFrame(raf);
+      document.documentElement.style.removeProperty("--bg-offset");
     };
   }, []);
 }
