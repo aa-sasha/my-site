@@ -37,6 +37,14 @@
     will-change: transform;
   }
 
+  /* Mobile viewport is much narrower — at 200% the pattern tiles visibly.
+     Scale up so a single tile dominates the screen. Desktop unchanged. */
+  @media (max-width: 639px) {
+    body::before {
+      background-size: 600% auto;
+    }
+  }
+
   /* Technical Grid Overlay */
   body::after {
     content: "";
