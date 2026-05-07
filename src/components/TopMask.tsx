@@ -1,22 +1,25 @@
 /**
- * Mobile-only mask covering the Dynamic Island / status bar area.
- * Requires `viewport-fit=cover` in viewport meta so env(safe-area-inset-top)
- * resolves to the physical top inset.
+ * Mobile-only top mask. Covers Dynamic Island, status bar AND Safari URL bar.
+ * Uses backdrop-blur (like iOS native nav bars) so content scrolling beneath it
+ * dissolves into a blur instead of a hard solid block.
  *
- * Solid at the very top (covers DI / status bar) → fades to transparent at the
- * bottom edge so there's no hard line cutting the page.
+ * Requires viewport-fit=cover so env(safe-area-inset-top) gives the physical
+ * top inset (DI / status bar). Add ~80px on top to cover the Safari URL bar.
  */
 export function TopMask() {
+  // Soft fade at the bottom so the mask doesn't end with a hard line.
+  const fade = "linear-gradient(to bottom, black 0%, black 80%, transparent 100%)";
   return (
     <div
       aria-hidden
       className="sm:hidden pointer-events-none fixed inset-x-0 top-0 z-50"
       style={{
-        // safe-area-inset-top covers the DI / status bar; +16px gives a soft
-        // fade band beneath it.
-        height: "calc(env(safe-area-inset-top) + 16px)",
-        background:
-          "linear-gradient(to bottom, var(--color-bg) 0%, var(--color-bg) calc(100% - 16px), rgba(248,250,252,0) 100%)",
+        height: "calc(env(safe-area-inset-top) + 80px)",
+        backdropFilter: "blur(20px) saturate(140%)",
+        WebkitBackdropFilter: "blur(20px) saturate(140%)",
+        backgroundColor: "rgba(248, 250, 252, 0.55)",
+        maskImage: fade,
+        WebkitMaskImage: fade,
       }}
     />
   );
