@@ -21,16 +21,6 @@
     background-color: var(--color-bg);
   }
 
-  /* iOS Safari: shift content below the Dynamic Island / status bar / URL bar.
-     The fixed body::before background still covers the whole viewport, so the
-     DI / URL bar overlay falls on the gradient pattern, not on text.
-     Mobile only — desktop layout untouched. */
-  @media (max-width: 639px) {
-    body {
-      padding-top: calc(env(safe-area-inset-top) + 60px);
-    }
-  }
-
   /* Fixed background via pseudo-element — avoids iOS Safari background-attachment: fixed bug */
   body::before {
     content: "";
