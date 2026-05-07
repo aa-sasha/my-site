@@ -13,7 +13,12 @@ const BASE =
   "transition-shadow";
 
 export function PrimaryButton({ fullWidth, children, ...rest }: Props) {
-  const layout = fullWidth ? "flex w-full px-6" : "inline-flex px-8";
+  // Non-fullWidth: full-width on mobile (<640px) so long content like an
+  // email address doesn't overflow viewport / cause horizontal scroll.
+  // sm:inline-flex restores the original desktop look at ≥640px.
+  const layout = fullWidth
+    ? "flex w-full px-6"
+    : "flex w-full px-6 sm:inline-flex sm:w-auto sm:px-8";
   return (
     <MagneticLink className={`${layout} ${BASE}`} {...rest}>
       {children}

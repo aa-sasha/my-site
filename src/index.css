@@ -29,10 +29,10 @@
   body::before {
     content: "";
     position: fixed;
-    top: 0;
+    top: -200px;
     left: 0;
     right: 0;
-    bottom: -200px;
+    bottom: -400px;
     background-image: url('/background.svg');
     background-size: 200% auto;
     background-position: center;
@@ -43,11 +43,11 @@
     will-change: transform;
   }
 
-  /* Mobile viewport is much narrower — scale the pattern so a single tile
-     covers the screen with no visible seams. Desktop keeps 200%. */
+  /* Mobile viewport is narrow — scale the pattern up so a single tile covers
+     the screen with no visible seams. Desktop keeps 200%. */
   @media (max-width: 639px) {
     body::before {
-      background-size: cover;
+      background-size: 200% 100%;
     }
   }
 
