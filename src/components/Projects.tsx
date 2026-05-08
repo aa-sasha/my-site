@@ -98,7 +98,7 @@ const Card = ({ project, index, progress, total }: CardProps) => {
         <div className="text-lg text-ink/60 font-mono font-medium">{project.category}</div>
       </div>
 
-      <div className="rounded-2xl overflow-hidden border-2 border-white/80 bg-black/5 mt-4 relative shadow-[inset_0_2px_10px_rgba(0,0,0,0.05)] p-3 sm:p-6 pointer-events-none">
+      <div className="rounded-xl sm:rounded-2xl overflow-hidden border-2 border-white/80 bg-black/5 mt-4 relative shadow-[inset_0_2px_10px_rgba(0,0,0,0.05)] p-3 sm:p-6 pointer-events-none">
         {project.coverImage ? (
           <img
             src={project.coverImage}
