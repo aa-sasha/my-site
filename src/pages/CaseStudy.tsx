@@ -1,8 +1,9 @@
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Fragment, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { projects } from "../data/projects";
 import { EASE_OUT_EXPO } from "../lib/easing";
+import { NotFound } from "./NotFound";
 
 function renderRichParagraph(text: string, key: number): ReactNode {
   if (text.startsWith("**") && text.endsWith("**") && text.indexOf("**", 2) === text.length - 2) {
@@ -36,7 +37,7 @@ export function CaseStudy() {
   const project = projects[currentIndex];
 
   if (!project) {
-    return <Navigate to="/" replace />;
+    return <NotFound />;
   }
 
   const nextProject = projects[currentIndex + 1] || projects[0];

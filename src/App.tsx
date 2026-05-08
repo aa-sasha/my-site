@@ -5,16 +5,24 @@ import {
   Outlet,
 } from "react-router-dom";
 import { MotionConfig } from "motion/react";
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Home } from "./pages/Home";
-import { CaseStudy } from "./pages/CaseStudy";
+import { NotFound } from "./pages/NotFound";
 import { MusicPlayer } from "./components/MusicPlayer";
+
+// Lazy: CaseStudy is only needed when a project tile is clicked.
+// Keeps the home-page initial bundle smaller.
+const CaseStudy = lazy(() =>
+  import("./pages/CaseStudy").then((m) => ({ default: m.CaseStudy }))
+);
 
 function RootLayout() {
   return (
     <>
       <ScrollRestoration />
-      <Outlet />
+      <Suspense fallback={null}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }
@@ -26,6 +34,7 @@ const router = createBrowserRouter(
       children: [
         { path: "/", element: <Home /> },
         { path: "/case/:slug", element: <CaseStudy /> },
+        { path: "*", element: <NotFound /> },
       ],
     },
   ],
@@ -40,6 +49,9 @@ function useScrollingBackground() {
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 639px)");
     if (!mq.matches) return;
+    // Respect reduced-motion preference — scroll-driven bg shifts can be
+    // disorienting for users sensitive to motion.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const LOCK = 140;
     let currentOffset = 0;
