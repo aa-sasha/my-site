@@ -80,7 +80,7 @@ const Card = ({ project, index, progress, total }: CardProps) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`${isLast ? "relative" : "sticky"} flex flex-col gap-6 pt-10 pb-12 px-8 w-full min-h-[640px] origin-top rounded-[var(--radius-2xl)] border border-white shadow-[0_12px_40px_rgba(0,126,255,0.1),_inset_0_1px_0_rgba(255,255,255,1)] text-ink ${tintBackground ? "" : "bg-white/70"} backdrop-blur-md cursor-none overflow-hidden group no-underline`}
+      className={`${isLast ? "relative" : "sticky"} flex flex-col gap-6 pt-8 pb-8 px-6 sm:pt-10 sm:pb-12 sm:px-8 w-full min-h-[480px] sm:min-h-[640px] origin-top rounded-3xl sm:rounded-[var(--radius-2xl)] border border-white shadow-[0_12px_40px_rgba(0,126,255,0.1),_inset_0_1px_0_rgba(255,255,255,1)] text-ink ${tintBackground ? "" : "bg-white/70"} backdrop-blur-md cursor-none overflow-hidden group no-underline`}
       style={{
         top: isLast ? undefined : `calc(2rem + ${index * 8}px)`,
         zIndex: index + 10,
@@ -98,7 +98,7 @@ const Card = ({ project, index, progress, total }: CardProps) => {
         <div className="text-lg text-ink/60 font-mono font-medium">{project.category}</div>
       </div>
 
-      <div className="rounded-2xl overflow-hidden border-2 border-white/80 bg-black/5 mt-4 relative shadow-[inset_0_2px_10px_rgba(0,0,0,0.05)] p-6 pointer-events-none">
+      <div className="rounded-2xl overflow-hidden border-2 border-white/80 bg-black/5 mt-4 relative shadow-[inset_0_2px_10px_rgba(0,0,0,0.05)] p-3 sm:p-6 pointer-events-none">
         {project.coverImage ? (
           <img
             src={project.coverImage}
@@ -114,7 +114,7 @@ const Card = ({ project, index, progress, total }: CardProps) => {
         )}
       </div>
 
-      <div className="mt-auto pt-4 flex flex-col gap-6 pointer-events-none">
+      <div className="mt-6 sm:mt-auto sm:pt-4 flex flex-col gap-6 pointer-events-none">
         <p className="text-ink/80 leading-relaxed text-sm font-mono line-clamp-3">{project.description}</p>
       </div>
     </MotionLink>
